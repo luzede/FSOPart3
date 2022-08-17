@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "deploy": "git push heroku main",
-    "addCommit": "git add . && git commit -m \"fast commit\""
+    "addCommit": "git add . && git commit -m \"fast commit\"",
+    "logs:prod": "heroku logs --tail"
   },
   "repository": {
     "type": "git",
