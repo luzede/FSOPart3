@@ -6,6 +6,7 @@ morgan.token('body', function (req, res) {
     return JSON.stringify(req.body); 
 })
 
+app.use(express.static('build'))
 app.use(express.json());
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
 
@@ -65,8 +66,9 @@ app.delete('/api/persons/:id', (req, res) => {
     const index = dataObject.findIndex(person => person.id === id);
     if (index !== -1) {
         dataObject.splice(index, 1);
+        return res.status(204).end();
     }
-    res.status(204).end();
+    res.status(404).end();
 })
 
 app.post('/api/persons', (req, res) => {
@@ -89,5 +91,5 @@ app.post('/api/persons', (req, res) => {
 
 })
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {console.log('Server running on port ', PORT)});
