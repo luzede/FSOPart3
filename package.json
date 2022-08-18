@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "deploy": "git push heroku main",
-    "addCommit": "git add . && git commit -m \"fast commit\"",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "build:ui": "shx rm -rf build && cd C:/Users/lukaz/Documents/GitHub/fullstackopen/part2/phonebook && npm run build && shx cp -r build C:/Users/lukaz/Documents/GitHub/FSOPart3",
     "logs:prod": "heroku logs --tail"
   },
   "repository": {

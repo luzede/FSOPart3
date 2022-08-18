@@ -67,10 +67,6 @@ app.delete('/api/persons/:id', (req, res, next) => {
 app.post('/api/persons', (req, res, next) => {
     const body = req.body;
 
-    if (!body.name || !body.number) {
-        return res.status(400).json({ error: "missing content" })
-    }
-
     const person = new Person({
         name: body.name,
         number: body.number
@@ -87,16 +83,11 @@ app.post('/api/persons', (req, res, next) => {
 app.put('/api/persons/:id', (req, res, next) => {
     const body = req.body;
 
-    if (!body.name || !body.number) {
-        return res.status(400).json({ error: "missing content" })
-    }
-
-    Person.findById(req.params.id)
-        .then(person => {
-            person.number = body.number;
-            person.save().then(savedPerson => {
-                res.json(savedPerson);
-            })
+    Person.findByIdAndUpdate(req.params.id,
+        {name: body.name, number: body.number},
+        {new: true, runValidators: true, context: 'query'})
+        .then(updatedPerson => {
+            res.json(updatedPerson);
         })
         .catch(error => {next(error)})
 })

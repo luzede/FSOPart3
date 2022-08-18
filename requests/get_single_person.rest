@@ -13,3 +13,12 @@ Content-Type: application/json
     "name":"Matti Luukkainen",
     "number":"040-123456"
 }
+
+###
+PUT http://localhost:3001/api/persons/62fe883bd50406593fbde39a
+Content-Type: application/json
+
+{
+    "name":"Matti Luukkainen",
+    "number":"040-1234567"
+}
